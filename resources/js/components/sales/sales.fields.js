@@ -1,0 +1,57 @@
+export default [
+    {
+        key: "client",
+        label: "Cliente",
+        sortable: false,
+        visible: true,
+        thStyle: {
+            width: "20%",
+        },
+    },
+    {
+        key: "address",
+        label: "Dirección",
+        sortable: false,
+        visible: true,
+    },
+    {
+        key: "code",
+        label: "Código",
+        sortable: false,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+    {
+        key: "date",
+        label: "Fecha",
+        sortable: true,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+    {
+        key: "amount",
+        label: "Monto",
+        sortable: false,
+        visible: true,
+        thClass: "text-right",
+        tdClass: "text-right",
+    },
+    {
+        key: "status",
+        label: "Estado",
+        sortable: false,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+    {
+        key: "actions",
+        label: "Acciones",
+        sortable: false,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+];

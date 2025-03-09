@@ -1,0 +1,46 @@
+export default [
+    {
+        key: "name",
+        label: "Nombre",
+        sortable: true,
+        visible: true,
+    },
+    // {
+    //     key: "address",
+    //     label: "Dirección",
+    //     sortable: false,
+    //     visible: true,
+    //     tdClass: "text-center",
+    //     thClass: "text-center",
+    // },
+    // {
+    //     key: "dni",
+    //     label: "DNI",
+    //     sortable: false,
+    //     visible: true,
+    //     tdClass: "text-center",
+    //     thClass: "text-center",
+    // },
+    // {
+    //     key: "phone",
+    //     label: "Teléfono",
+    //     sortable: false,
+    //     visible: true,
+    // },
+    {
+        key: "created_at",
+        label: "Creado el",
+        sortable: true,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+    {
+        key: "actions",
+        label: "Acciones",
+        sortable: false,
+        visible: true,
+        tdClass: "text-center",
+        thClass: "text-center",
+    },
+];
