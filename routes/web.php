@@ -41,7 +41,8 @@ Route::post('/customers-edit', [CustomerController::class, 'update'])->name('cus
 // SALES
 Route::post('/sales-list', [SalesController::class, 'index'])->name('sales.index');
 Route::post('/sales-add', [SalesController::class, 'store'])->name('sales.store');
-Route::post('/sales-update-status', [SalesController::class, 'update'])->name('sales.update');
+Route::post('/sales-update', [SalesController::class, 'update'])->name('sales.update');
+Route::post('/sales-update-status', [SalesController::class, 'updateStatus'])->name('sales.updateStatus');
 Route::post('/sales-details', [SalesController::class, 'details'])->name('sales.details');
 
 // ADRESSES

@@ -4,7 +4,7 @@
       v-model="show"
       ref="modalName"
       modal-class="modal-primary"
-      title="REGISTRAR VENTA"
+      title="DETALLE DE VENTA"
       size="xl"
       @hidden="onCancel"
       scrollable
@@ -118,13 +118,14 @@
         </b-row>
       </validation-observer>
       <template #modal-footer>
-        <b-button variant="primary" @click="onOk">Registrar</b-button>
+        <b-button variant="primary" @click="onOk">Guardar</b-button>
       </template>
 
       <!-- AGREGAR PRODUCTOS -->
       <add-sale-product
         ref="addSaleProduct"
         :products="products"
+        :isEdit="true"
         @updateTotalAmount="updateTotalAmount"
       />
 
@@ -182,21 +183,15 @@ export default {
       products: [],
     };
   },
-  computed: {
-    isEdit() {
-      return this.pSale !== null;
-    },
-  },
   async created() {
     this.setDate();
     this.getCustomers();
     this.getAddresses();
     this.show = true;
+    this.sale = { ...this.pSale };
+    this.products = await this.getSaleDetails();
 
-    if (this.isEdit) {
-      this.sale = { ...this.pSale };
-      this.products = await this.getSaleDetails();
-    }
+    console.log(this.products);
   },
   methods: {
     async onOk() {
@@ -209,15 +204,16 @@ export default {
 
       try {
         const payload = {
+          sale_id: this.sale.id,
           client_id: this.sale.client_id,
           address_id: this.sale.address_id,
           code: this.sale.code,
           date: this.sale.date,
           amount: this.sale.amount,
-          products: this.sale.products,
+          products: this.products,
         };
 
-        const data = await axios.post("/sales-add", payload);
+        const data = await axios.post("/sales-update", payload);
 
         if (data.status == 200) {
           this.show = false;

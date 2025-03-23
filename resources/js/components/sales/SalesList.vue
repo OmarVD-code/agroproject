@@ -120,20 +120,20 @@
         </template>
 
         <template #bottom-row>
-          <b-th colspan="4" class="text-right py-0">
+          <b-th colspan="4" class="text-right py-0" v-if="status !== null">
             <div class="foot-totales" :style="{ color: '#000' }">
               <p class="m-0" style="font-weight: 600">SUBTOTAL</p>
               <p class="m-0" style="font-weight: 600">TOTAL</p>
             </div>
           </b-th>
-          <b-th colspan="1" class="text-right py-0">
+          <b-th colspan="1" class="text-right py-0" v-if="status !== null">
             <div class="foot-totales" :style="{ color: '#000' }">
               {{ totals.total | formatMoney }}
               <br />
               {{ totals.subtotal | formatMoney }}
             </div>
           </b-th>
-          <b-th colspan="2" />
+          <b-th colspan="2" v-if="status !== null" />
         </template>
       </b-table>
     </filter-slot>
@@ -148,6 +148,7 @@
       v-if="showSaleDetailModal"
       :pSale="saleDetail"
       @close="showSaleDetailModal = false"
+      @reload="refreshTable"
     />
   </div>
 </template>

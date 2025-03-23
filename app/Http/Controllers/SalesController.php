@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Laravel\Ui\Presets\React;
+use Illuminate\Support\Facades\Log;
 
 class SalesController extends Controller
 {
@@ -74,6 +74,50 @@ class SalesController extends Controller
     }
 
     public function update(Request $request)
+    {
+        Log::info($request->all());
+        try {
+            DB::beginTransaction();
+            DB::table('sales')
+                ->where('id', $request->sale_id)
+                ->update([
+                    'customer_id' => $request->client_id,
+                    'address_id' => $request->address_id,
+                    'code' => $request->code,
+                    'date' => $request->date,
+                    'updated_at' => now()
+                ]);
+
+            foreach ($request->products as $product) {
+                if ($product['deleted']) {
+                    DB::table('sales_details')
+                        ->where('id', $product['sale_detail_id'])
+                        ->delete();
+                    continue;
+                }
+
+                if ($product['modified']) {
+                    DB::table('sales_details')
+                        ->where('id', $product['sale_detail_id'])
+                        ->update(
+                            [
+                                'unit_price' => $product['unit_price'],
+                                'quantity' => $product['quantity'],
+                                'updated_at' => now(),
+                            ]
+                        );
+                }
+            }
+            DB::commit();
+            return response()->json(['message' => 'La venta ha sido actualizada correctamente'], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+            return response()->json(['message' => 'Error al actualizar venta', 'error' => $th->getMessage()], 500);
+        }
+    }
+
+    public function updateStatus(Request $request)
     {
         try {
             DB::beginTransaction();

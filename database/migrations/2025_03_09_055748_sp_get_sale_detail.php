@@ -19,12 +19,14 @@ class SpGetSaleDetail extends Migration
         )
             BEGIN
                 select
-                -- sd.id sale_detail_id,
+                sd.id sale_detail_id,
                 p.id,
                 p.name,
                 sd.quantity,
                 sd.unit_price,
-                (sd.quantity*sd.unit_price) amount
+                (sd.quantity*sd.unit_price) total,
+                false deleted,
+                false modified
             from sales_details sd
             join products p on p.id = sd.product_id
             where sd.sale_id = pSaleId;
