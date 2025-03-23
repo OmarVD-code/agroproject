@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exports\MonthlySalesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SalesController extends Controller
 {
@@ -136,5 +138,15 @@ class SalesController extends Controller
         $statement = "CALL sp_get_sale_detail(?)";
         $data = DB::select($statement, [$request->sale_id]);
         return response()->json($data);
+    }
+
+    public function monthlyReport(Request $request)
+    {
+        try {
+            $fileName = "INVENTARIO_VILLARREAL_{$request->year}_{$request->month}.xlsx";
+            return Excel::download(new MonthlySalesExport($request->year, $request->month), $fileName);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al generar reporte', 'error' => $th->getMessage()], 500);
+        }
     }
 }

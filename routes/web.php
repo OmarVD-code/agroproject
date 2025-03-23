@@ -44,6 +44,7 @@ Route::post('/sales-add', [SalesController::class, 'store'])->name('sales.store'
 Route::post('/sales-update', [SalesController::class, 'update'])->name('sales.update');
 Route::post('/sales-update-status', [SalesController::class, 'updateStatus'])->name('sales.updateStatus');
 Route::post('/sales-details', [SalesController::class, 'details'])->name('sales.details');
+Route::post('/sales-monthly-report', [SalesController::class, 'monthlyReport'])->name('sales.monthlyReport');
 
 // ADRESSES
 Route::get('/address-list', [AddressController::class, 'index'])->name('address.index');

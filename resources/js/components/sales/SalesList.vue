@@ -52,6 +52,14 @@
           v-b-tooltip.hover.top="'Agregar venta'"
           @click="openRegisterSaleModal()"
         />
+        <feather-icon
+          name="file-text"
+          size="24"
+          class="ml-2 text-success"
+          :clickable="true"
+          v-b-tooltip.hover.top="'Generar reporte mensual'"
+          @click="generateMonthlyReport()"
+        />
       </template>
       <b-table
         ref="salesTable"
@@ -309,6 +317,52 @@ export default {
       this.filterSlot.paginate.currentPage = e;
       this.refreshTable();
     },
+    async generateMonthlyReport() {
+      try {
+        const response = await axios({
+          url: "/sales-monthly-report",
+          method: "POST",
+          responseType: "blob",
+          data: {
+            year: this.year,
+            month: this.month,
+          },
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+
+        const month_text = this.getMonths(this.month);
+        const fileName = `INVENTARIO_VILLARREAL_${month_text}_${this.year}.xlsx`;
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        this.$toastr.success("Reporte descargado con éxito", "Éxito");
+      } catch (error) {
+        console.error(error);
+        this.$toastr.error("Ha ocurrido un error al descargar el reporte");
+      }
+    },
+    getMonths(month) {
+      const names = {
+        1: "Enero",
+        2: "Febrero",
+        3: "Marzo",
+        4: "Abril",
+        5: "Mayo",
+        6: "Junio",
+        7: "Julio",
+        8: "Agosto",
+        9: "Septiembre",
+        10: "Octubre",
+        11: "Noviembre",
+        12: "Diciembre",
+      };
+      return names[month];
+    }
   },
   watch: {
     year() {
