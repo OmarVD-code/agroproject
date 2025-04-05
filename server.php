@@ -4,9 +4,10 @@ $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
 );
 
-// Railway asigna un puerto dinámico en la variable de entorno `PORT`.
-// Usamos esta variable para que Laravel sirva la aplicación correctamente.
-$port = getenv("PORT") ?: 8000;  // Si no se encuentra la variable, usa el puerto 8000 por defecto.
+$port = getenv("PORT") ?: 8000;
+
+// Verifica si el puerto se asignó correctamente
+error_log("Servidor escuchando en el puerto: $port");  // Agregar un log de error temporal
 
 if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
     return false;
