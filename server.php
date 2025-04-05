@@ -1,19 +1,13 @@
 <?php
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
- */
-
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
 );
 
-// This file allows us to emulate Apache's "mod_rewrite" functionality from the
-// built-in PHP web server. This provides a convenient way to test a Laravel
-// application without having installed a "real" web server software here.
+// Railway asigna un puerto dinámico en la variable de entorno `PORT`.
+// Usamos esta variable para que Laravel sirva la aplicación correctamente.
+$port = getenv("PORT") ?: 8000;  // Si no se encuentra la variable, usa el puerto 8000 por defecto.
+
 if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
     return false;
 }
