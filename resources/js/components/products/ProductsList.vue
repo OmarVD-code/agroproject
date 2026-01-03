@@ -2,7 +2,7 @@
   <div>
     <h3>Lista de productos</h3>
     <filter-slot
-      :filters="filterSlot.filters"
+      :filters="[]"
       :filterPrincipal="filterSlot.filterSearch"
       :paginate="filterSlot.paginate"
       :totalRows="filterSlot.totalRows"
