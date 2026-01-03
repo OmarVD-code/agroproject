@@ -2,7 +2,7 @@
   <!-- Sidebar -->
   <div
     :class="[
-      'px-3 bg-dark text-white sidebar-content',
+      'px-3 sidebar-content',
       { compressed: isCompressed && !isHovered },
     ]"
     @mouseenter="handleMouseEnter"
@@ -25,13 +25,6 @@
     </div>
     <!-- Items del sidebar -->
     <ul class="list-unstyled sidebar-items">
-      <!-- <li v-for="item in items" :key="item.label">
-        <router-link :to="item.path" class="d-flex align-items-center router-link">
-          <feather-icon :name="item.icon" size="25" class="mr-3" />
-          <span v-if="!isCompressed || isHovered">{{ item.label }}</span>
-        </router-link>
-      </li> -->
-
       <li
         v-for="item in items"
         :key="item.label"
@@ -83,8 +76,7 @@ export default {
 </script>
 
 <style scoped>
-/* Estilo opcional para personalizar */
-.sidebar-content {
+/* .sidebar-content {
   max-width: 250px;
   height: calc(
     100vh - 55.98px
@@ -93,7 +85,6 @@ export default {
   transition: max-width 0.3s ease-in-out;
   left: 0;
   z-index: 1000;
-  /* position: fixed; */
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -145,6 +136,5 @@ export default {
 .sidebar-items li.active .router-link {
   color: #7ee787;
   font-weight: 700;
-}
-
+} */
 </style>

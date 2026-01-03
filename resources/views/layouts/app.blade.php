@@ -26,7 +26,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md shadow-sm" id="mainNavbar">
             <div class="container">
                 <span class="navbar-brand">
                     AGROPECUARIA BECKER
@@ -43,6 +43,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <!-- Dark/Light Mode -->
+                        <li class="nav-item">
+                            <span id="themeToggle" class="nav-link" role="button">
+                                <i id="iconMoon" class="fas fa-moon"></i>
+                                <i id="iconSun" class="fas fa-sun d-none"></i>
+                            </span>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -85,5 +92,33 @@
         </main>
     </div>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const body = document.body;
+        const navbar = document.getElementById("mainNavbar");
+        const toggle = document.getElementById("themeToggle");
+        const iconMoon = document.getElementById("iconMoon");
+        const iconSun = document.getElementById("iconSun");
+
+        // Cargar preferencia
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+            body.classList.add("dark-mode");
+            iconMoon.classList.add("d-none");
+            iconSun.classList.remove("d-none");
+        }
+
+        toggle.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+
+            const isDark = body.classList.contains("dark-mode");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+
+            iconMoon.classList.toggle("d-none", isDark);
+            iconSun.classList.toggle("d-none", !isDark);
+        });
+    });
+</script>
 
 </html>
