@@ -8,44 +8,65 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Auth;
 
-
+/*
+|--------------------------------------------------------------------------
+| Landing
+|--------------------------------------------------------------------------
+| Si estás logueado -> /home
+| Si no -> /login
+*/
 Route::get('/', function () {
-    return view('auth/login');
+    return Auth::check()
+        ? redirect()->route('home')
+        : redirect()->route('login');
 });
 
-Auth::routes();
+/*
+|--------------------------------------------------------------------------
+| Auth routes (login, register, logout, password reset, etc.)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('prevent-back-history')->group(function () {
+    Auth::routes();
+});
+/*
+|--------------------------------------------------------------------------
+| Vistas principales (proteger con auth)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'prevent-back-history'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/products', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/sales', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/customers', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/suppliers', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/reports', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/products', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/sales', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/customers', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/suppliers', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/reports', [App\Http\Controllers\HomeController::class, 'index']);
 
-// GETTERS
-// SUPPLIERS
-Route::get('/suppliers-list', [SuppliersController::class, 'index'])->name('suppliers.index');
+    // SUPPLIERS
+    Route::get('/suppliers-list', [SuppliersController::class, 'index'])->name('suppliers.index');
 
-// PRODUCTS
-Route::post('/products-list', [ProductsController::class, 'index'])->name('products.index');
-Route::get('/products-get', [ProductsController::class, 'getProducts'])->name('products.getProducts');
-Route::post('/products-add', [ProductsController::class, 'store'])->name('products.store');
-Route::post('/products-edit', [ProductsController::class, 'update'])->name('products.update');
+    // PRODUCTS
+    Route::post('/products-list', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('/products-get', [ProductsController::class, 'getProducts'])->name('products.getProducts');
+    Route::post('/products-add', [ProductsController::class, 'store'])->name('products.store');
+    Route::post('/products-edit', [ProductsController::class, 'update'])->name('products.update');
 
-// CUSTOMERS
-Route::post('/customers-list', [CustomerController::class, 'index'])->name('customers.index');
-Route::get('/customers-get', [CustomerController::class, 'getCustomers'])->name('customers.getCustomers');
-Route::post('/customers-add', [CustomerController::class, 'store'])->name('customers.store');
-Route::post('/customers-edit', [CustomerController::class, 'update'])->name('customers.update');
+    // CUSTOMERS
+    Route::post('/customers-list', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/customers-get', [CustomerController::class, 'getCustomers'])->name('customers.getCustomers');
+    Route::post('/customers-add', [CustomerController::class, 'store'])->name('customers.store');
+    Route::post('/customers-edit', [CustomerController::class, 'update'])->name('customers.update');
 
-// SALES
-Route::post('/sales-list', [SalesController::class, 'index'])->name('sales.index');
-Route::post('/sales-add', [SalesController::class, 'store'])->name('sales.store');
-Route::post('/sales-update', [SalesController::class, 'update'])->name('sales.update');
-Route::post('/sales-update-status', [SalesController::class, 'updateStatus'])->name('sales.updateStatus');
-Route::post('/sales-details', [SalesController::class, 'details'])->name('sales.details');
-Route::post('/sales-monthly-report', [SalesController::class, 'monthlyReport'])->name('sales.monthlyReport');
+    // SALES
+    Route::post('/sales-list', [SalesController::class, 'index'])->name('sales.index');
+    Route::post('/sales-add', [SalesController::class, 'store'])->name('sales.store');
+    Route::post('/sales-update', [SalesController::class, 'update'])->name('sales.update');
+    Route::post('/sales-update-status', [SalesController::class, 'updateStatus'])->name('sales.updateStatus');
+    Route::post('/sales-details', [SalesController::class, 'details'])->name('sales.details');
+    Route::post('/sales-monthly-report', [SalesController::class, 'monthlyReport'])->name('sales.monthlyReport');
 
-// ADRESSES
-Route::get('/address-list', [AddressController::class, 'index'])->name('address.index');
-Route::post('/address-add', [AddressController::class, 'store'])->name('address.store');
+    // ADDRESSES
+    Route::get('/address-list', [AddressController::class, 'index'])->name('address.index');
+    Route::post('/address-add', [AddressController::class, 'store'])->name('address.store');
+});
