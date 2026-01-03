@@ -53,8 +53,8 @@ export default {
         { label: "INVENTARIO", icon: "box", path: "/products" },
         { label: "VENTAS", icon: "dollar-sign", path: "/sales" },
         { label: "CLIENTES", icon: "users", path: "/customers" },
-        { label: "PROVEEDORES", icon: "truck", path: "/suppliers" },
-        { label: "REPORTES", icon: "file-plus", path: "/reports" },
+        // { label: "PROVEEDORES", icon: "truck", path: "/suppliers" },
+        // { label: "REPORTES", icon: "file-plus", path: "/reports" },
       ],
     };
   },
