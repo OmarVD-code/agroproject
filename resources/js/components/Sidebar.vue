@@ -25,8 +25,22 @@
     </div>
     <!-- Items del sidebar -->
     <ul class="list-unstyled sidebar-items">
-      <li v-for="item in items" :key="item.label">
+      <!-- <li v-for="item in items" :key="item.label">
         <router-link :to="item.path" class="d-flex align-items-center router-link">
+          <feather-icon :name="item.icon" size="25" class="mr-3" />
+          <span v-if="!isCompressed || isHovered">{{ item.label }}</span>
+        </router-link>
+      </li> -->
+
+      <li
+        v-for="item in items"
+        :key="item.label"
+        :class="{ active: isActive(item.path) }"
+      >
+        <router-link
+          :to="item.path"
+          class="d-flex align-items-center router-link"
+        >
           <feather-icon :name="item.icon" size="25" class="mr-3" />
           <span v-if="!isCompressed || isHovered">{{ item.label }}</span>
         </router-link>
@@ -61,6 +75,9 @@ export default {
     handleMouseLeave() {
       this.isHovered = false; // Comprime el sidebar si el pin no está activado
     },
+    isActive(path) {
+      return this.$route.path === path; // coincidencia exacta
+    },
   },
 };
 </script>
@@ -71,9 +88,9 @@ export default {
   max-width: 250px;
   height: calc(
     100vh - 55.98px
-  ); /* Ajusta según la altura de tu barra de navegación */
-  overflow: hidden; /* Si no quieres que aparezca el scroll */
-  transition: max-width 0.3s ease-in-out; /* Transición suave para el ancho */
+  );
+  overflow: hidden;
+  transition: max-width 0.3s ease-in-out;
   left: 0;
   z-index: 1000;
   /* position: fixed; */
@@ -83,7 +100,7 @@ export default {
 }
 
 .sidebar-content.compressed {
-  max-width: 60px; /* Ancho cuando está comprimido */
+  max-width: 60px;
 }
 
 .sidebar-content.compressed .sidebar-items li {
@@ -91,7 +108,7 @@ export default {
 }
 
 .sidebar-content.compressed .mr-3 {
-  margin-right: 0; /* Quita el margen del icono en modo comprimido */
+  margin-right: 0;
 }
 
 .sidebar-pin {
@@ -116,14 +133,18 @@ export default {
 }
 
 .sidebar-items li:hover {
-  transition: transform 0.2s ease-in-out; /* Suaviza la animación */
-  transform: translateX(10px); /* Mueve el contenido 10px hacia la derecha */
+  transition: transform 0.2s ease-in-out;
+  transform: translateX(10px);
 }
 
-/* Asegura que el html y body ocupen el 100% de la altura */
-html,
-body {
-  height: 100%;
-  margin: 0;
+.sidebar-items li.active {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
 }
+
+.sidebar-items li.active .router-link {
+  color: #7ee787;
+  font-weight: 700;
+}
+
 </style>
