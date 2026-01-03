@@ -62,3 +62,36 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### How to start?
+#### PHP version
+PHP 8.2 is required
+
+#### GD installation and verification
+Install gd: sudo apt install -y php8.2-gd   
+php -m | grep -i gd
+
+#### Composer installation
+Then run: composer install --ignore-platform-req=ext-zip
+
+#### NPM installation
+And then: npm i
+
+#### CONFIG DB
+Create a .env file and put the following credentials according to your database:
+
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=3306  
+DB_DATABASE=
+DB_USERNAME= 
+DB_PASSWORD=
+
+#### Migrate and generate key
+Run: php artisan migrate
+Run: php artisan key:generate
+
+
+#### How to run?
+Run: php artisan serve  
+Run: npm run dev
