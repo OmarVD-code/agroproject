@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style scoped>
-/* .sidebar-content {
+.sidebar-content {
   max-width: 250px;
   height: calc(
     100vh - 55.98px
@@ -136,5 +136,5 @@ export default {
 .sidebar-items li.active .router-link {
   color: #7ee787;
   font-weight: 700;
-} */
+}
 </style>

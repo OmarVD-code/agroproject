@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Reports List</h1>  
+    <h1>Lista de Reportes</h1>  
   </div>
 </template>
 

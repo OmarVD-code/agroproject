@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Suppliers List</h1>  
+    <h1>Lista de Proveedores</h1>  
   </div>
 </template>
 

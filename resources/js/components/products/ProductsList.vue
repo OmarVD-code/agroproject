@@ -41,6 +41,10 @@
           </div>
         </template>
 
+        <template #cell(unit_price)="data">
+          <span>{{ data.item.unit_price | formatMoney }}</span>
+        </template>
+
         <template #cell(created_at)="data">
           <span>{{ data.item.created_at | myGlobal }}</span>
         </template>
