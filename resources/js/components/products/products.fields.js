@@ -5,14 +5,6 @@ export default [
         sortable: true,
         visible: true,
     },
-    // {
-    //     key: "category",
-    //     label: "Categoría",
-    //     sortable: false,
-    //     visible: true,
-    //     tdClass: "text-center",
-    //     thClass: "text-center",
-    // },
     {
         key: "unit_price",
         label: "Precio unitario (S/.)",
