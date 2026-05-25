@@ -42,7 +42,7 @@
       </b-sidebar>
       <div class="d-flex justify-content-between align-items-center">
         <span class="text-muted">
-          Mostrando {{ startPage }} a {{ toPage }} de {{ totalRows }} entradas
+          Mostrando {{ startPage }} a {{ toPage }} de {{ totalRows }} registros
         </span>
         <b-pagination
           v-model="currentPage"
@@ -64,6 +64,7 @@
             :options="[10, 25, 50, 100]"
             :clearable="false"
             class="per-page-selector d-inline-block mx-50"
+            style="min-width: 75px"
           />
           <label class="mr-2">registros</label>
           <feather-icon

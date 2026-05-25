@@ -16,7 +16,7 @@
           : 'justify-content-between'
       "
     >
-      <h4 v-if="!isCompressed || isHovered">MENÚ</h4>
+      <span v-if="!isCompressed || isHovered">MENÚ</span>
       <i
         class="fa-solid mt-1 sidebar-pin"
         :class="isCompressed ? 'fa-thumbtack' : 'fa-thumbtack-slash'"
@@ -91,15 +91,11 @@ export default {
 }
 
 .sidebar-content.compressed {
-  max-width: 60px;
+  max-width: 80px;
 }
 
 .sidebar-content.compressed .sidebar-items li {
   justify-content: center;
-}
-
-.sidebar-content.compressed .mr-3 {
-  margin-right: 0;
 }
 
 .sidebar-pin {
@@ -109,17 +105,17 @@ export default {
 .sidebar-items {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 15px 0;
 }
 
 .sidebar-items li {
-  padding: 10px 0;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .router-link {
-  color: #fff;
+  color: #000 !important;
   text-decoration: none;
 }
 
@@ -129,12 +125,11 @@ export default {
 }
 
 .sidebar-items li.active {
-  background: rgba(255, 255, 255, 0.12);
+  background: #ebeced;
   border-radius: 10px;
 }
 
 .sidebar-items li.active .router-link {
-  color: #7ee787;
   font-weight: 700;
 }
 </style>
