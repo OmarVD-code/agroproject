@@ -22,14 +22,19 @@ class SpGenerateSalesMonthlyReport extends Migration
                 DECLARE from_date DATE;
                 DECLARE to_date DATE;
 
-                SET @from_date = STR_TO_DATE(CONCAT(pYear, '-', LPAD(pMonth, 2, '0'), '-01'), '%Y-%m-%d');
-                SET @to_date = DATE_SUB(DATE_ADD(@from_date, INTERVAL 1 MONTH), INTERVAL 1 SECOND);
+                IF pMonth = 0 THEN
+                    SET from_date = STR_TO_DATE(CONCAT(pYear, '-01-01'), '%Y-%m-%d');
+                    SET to_date = STR_TO_DATE(CONCAT(pYear, '-12-31'), '%Y-%m-%d');
+                ELSE
+                    SET from_date = STR_TO_DATE(CONCAT(pYear, '-', LPAD(pMonth, 2, '0'), '-01'), '%Y-%m-%d');
+                    SET to_date = LAST_DAY(from_date);
+                END IF;
 
                 SELECT p.name, sd.quantity
                 FROM sales_details sd
                 JOIN sales s ON s.id = sd.sale_id
                 JOIN products p ON p.id = sd.product_id
-                WHERE s.date BETWEEN @from_date AND @to_date
+                WHERE s.date BETWEEN from_date AND to_date
                 AND s.status NOT IN (3);
             END
         ";

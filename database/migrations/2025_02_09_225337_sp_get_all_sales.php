@@ -32,8 +32,13 @@ class SpGetAllSales extends Migration
                 DECLARE vStartDate DATE;
                 DECLARE vEndDate DATE;
 
-                SET vStartDate = STR_TO_DATE(CONCAT(pYear, '-', LPAD(pMonth, 2, '0'), '-01'), '%Y-%m-%d');
-                SET vEndDate = DATE_SUB(DATE_ADD(vStartDate, INTERVAL 1 MONTH), INTERVAL 1 SECOND);
+                IF pMonth = 0 THEN
+                    SET vStartDate = STR_TO_DATE(CONCAT(pYear, '-01-01'), '%Y-%m-%d');
+                    SET vEndDate = STR_TO_DATE(CONCAT(pYear, '-12-31'), '%Y-%m-%d');
+                ELSE
+                    SET vStartDate = STR_TO_DATE(CONCAT(pYear, '-', LPAD(pMonth, 2, '0'), '-01'), '%Y-%m-%d');
+                    SET vEndDate = LAST_DAY(vStartDate);
+                END IF;
 
                 DROP TEMPORARY TABLE IF EXISTS tmp_sales;
                 CREATE TEMPORARY TABLE IF NOT EXISTS tmp_sales (

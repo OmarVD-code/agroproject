@@ -197,6 +197,7 @@ export default {
       isBusy: false,
       optionsYears: [],
       optionsMonths: [
+        { id: 0, name: "Todos" },
         { id: 1, name: "Enero" },
         { id: 2, name: "Febrero" },
         { id: 3, name: "Marzo" },
@@ -211,12 +212,12 @@ export default {
         { id: 12, name: "Diciembre" },
       ],
       year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
+      month: 0,
       filterStatusOptions: [
-        { id: null, name: "VER TODO" },
-        { id: 1, name: "PENDIENTE" },
-        { id: 2, name: "CANCELADO" },
-        { id: 3, name: "ANULADO" },
+        { id: null, name: "Todos" },
+        { id: 1, name: "Pendiente" },
+        { id: 2, name: "Cancelado" },
+        { id: 3, name: "Anulado" },
       ],
       status: null,
       items: [],
@@ -333,7 +334,7 @@ export default {
         const link = document.createElement("a");
         link.href = url;
 
-        const month_text = this.getMonths(this.month);
+        const month_text = this.month === 0 ? "" : this.getMonths(this.month);
         const fileName = `INVENTARIO_VILLARREAL_${month_text}_${this.year}.xlsx`;
         link.setAttribute("download", fileName);
         document.body.appendChild(link);
