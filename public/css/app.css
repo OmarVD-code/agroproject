@@ -9293,89 +9293,75 @@ body.dark-mode {
   --card-body-bg: #3a3838;
   --border: #2a2a2a;
 }
-
 body.dark-mode .v-select .vs__dropdown-toggle {
   background: #000 !important;
   border-color: #444 !important;
   color: #fff !important;
 }
-
 body.dark-mode .v-select .vs__selected {
   color: #fff !important;
 }
-
 body.dark-mode .v-select input {
   color: #fff !important;
 }
-
 body.dark-mode .v-select .vs__dropdown-menu {
   background: #000 !important;
   color: #fff !important;
   border-color: #000 !important;
 }
-
 body.dark-mode .v-select .vs__dropdown-option,
 body.dark-mode .v-select .vs__no-options {
   background: #000 !important;
   color: #fff !important;
 }
-
 body.dark-mode .v-select .vs__dropdown-option:hover {
   background: #007bff !important;
   color: #fff !important;
 }
-
 body.dark-mode .foot-totales {
   color: #fff !important;
 }
-
 body.dark-mode .sidebar-content {
   background-color: #343a40;
   color: #fff !important;
+  border-right: 2px solid #000;
 }
-
 body.dark-mode .router-link {
   color: #fff !important;
 }
-
 body.dark-mode .sidebar-items li.active {
   background: rgba(255, 255, 255, 0.12);
 }
-
 body.dark-mode .form-control {
   background: #000 !important;
   color: #fff !important;
   border-color: #555 !important;
 }
-
 body.dark-mode .form-control:focus {
   background: #000 !important;
   color: #fff !important;
   border-color: #007bff !important;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
 }
-
 body.dark-mode .form-control::-moz-placeholder {
   color: #999 !important;
 }
-
 body.dark-mode .form-control::placeholder {
   color: #999 !important;
 }
-
-body.dark-mode .form-control:disabled,
-body.dark-mode .form-control[readonly] {
+body.dark-mode .form-control:disabled, body.dark-mode .form-control[readonly] {
   background-color: #000 !important;
   color: #666 !important;
 }
-
+body.dark-mode .form-control::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 body.dark-mode .pagination .page-item:first-child .page-link,
 body.dark-mode .pagination .page-item:last-child .page-link {
   background-color: #000 !important;
   border-color: #000 !important;
   color: #fff !important;
 }
-
 body.dark-mode .pagination .page-item:first-child .page-link:hover,
 body.dark-mode .pagination .page-item:last-child .page-link:hover,
 body.dark-mode .pagination .page-item:first-child .page-link:focus,
@@ -9384,10 +9370,6 @@ body.dark-mode .pagination .page-item:last-child .page-link:focus {
   border-color: #000 !important;
   color: #fff !important;
   box-shadow: none !important;
-}
-
-body.dark-mode .form-control::-webkit-calendar-picker-indicator {
-  filter: invert(1);
 }
 
 *,
@@ -9421,6 +9403,7 @@ body {
 .sidebar-content {
   background-color: #fff;
   color: #000 !important;
+  border-right: 2px solid #ebeced;
 }
 
 .router-link[data-v-81fbb27e] {
