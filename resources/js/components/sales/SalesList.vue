@@ -334,8 +334,11 @@ export default {
         const link = document.createElement("a");
         link.href = url;
 
-        const month_text = this.month === 0 ? "" : this.getMonths(this.month);
-        const fileName = `INVENTARIO_VILLARREAL_${month_text}_${this.year}.xlsx`;
+        const month_text = this.getMonths(this.month);
+        const fileName =
+          this.month === 0
+            ? `INVENTARIO_VILLARREAL_${this.year}.xlsx`
+            : `INVENTARIO_VILLARREAL_${month_text}_${this.year}.xlsx`;
         link.setAttribute("download", fileName);
         document.body.appendChild(link);
         link.click();
@@ -348,21 +351,7 @@ export default {
       }
     },
     getMonths(month) {
-      const names = {
-        1: "Enero",
-        2: "Febrero",
-        3: "Marzo",
-        4: "Abril",
-        5: "Mayo",
-        6: "Junio",
-        7: "Julio",
-        8: "Agosto",
-        9: "Septiembre",
-        10: "Octubre",
-        11: "Noviembre",
-        12: "Diciembre",
-      };
-      return names[month];
+      return this.optionsMonths.find((m) => m.id === month)?.name || "";
     }
   },
   watch: {
